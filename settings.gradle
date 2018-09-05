@@ -1,4 +1,5 @@
 rootProject.name = 'playground'
 include 'spring-aop'
 include 'spring-core'
+include 'algorithms'
 
