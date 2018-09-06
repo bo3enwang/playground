@@ -4,9 +4,8 @@ import java.util.Arrays;
 
 public class ArrayAlgorithms {
     public static void main(String[] args) {
-        int[] nums = new int[]{0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
-        System.out.println(removeDuplicates(nums));
-        System.out.println(Arrays.toString(nums));
+        int[] nums = new int[]{7, 1, 5, 3, 6, 4};
+        System.out.println(maxProfit(nums));
     }
 
     public static int removeDuplicates(int[] nums) {
@@ -23,5 +22,21 @@ public class ArrayAlgorithms {
             }
         }
         return index;
+    }
+
+    public static int maxProfit(int[] prices) {
+        if (prices == null || prices.length == 0) {
+            return 0;
+        }
+        int count = 0;
+//        for (int i = 0, j = prices.length - 1; i < prices.length || j >= 0; i++, j--) {
+//            if (prices[i] < prices[j] && i < j) {
+//                count += prices[j] - prices[i];
+//            }
+//        }
+        for (int i = 0; i < prices.length; i++) {
+            
+        }
+        return count;
     }
 }
