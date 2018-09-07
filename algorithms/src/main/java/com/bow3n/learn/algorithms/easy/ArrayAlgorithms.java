@@ -5,7 +5,8 @@ import java.util.Arrays;
 public class ArrayAlgorithms {
     public static void main(String[] args) {
         int[] nums = new int[]{7, 1, 5, 3, 6, 4};
-        System.out.println(maxProfit(nums));
+        int[] nums2 = new int[]{1, 2, 3, 4, 5};
+        System.out.println(maxProfit(nums2));
     }
 
     public static int removeDuplicates(int[] nums) {
@@ -29,14 +30,26 @@ public class ArrayAlgorithms {
             return 0;
         }
         int count = 0;
-//        for (int i = 0, j = prices.length - 1; i < prices.length || j >= 0; i++, j--) {
-//            if (prices[i] < prices[j] && i < j) {
-//                count += prices[j] - prices[i];
-//            }
-//        }
-        for (int i = 0; i < prices.length; i++) {
+        int max = 0;
+        int buyIn = 0;
 
+        for (int i = 1; i < prices.length; i++) {
+            int earn = prices[i] - prices[buyIn];
+            if (earn > max) {
+                max = earn;
+                if (i == prices.length - 1) {
+                    count += earn;
+                }
+            } else {
+                count += max;
+                max = 0;
+                buyIn = i;
+            }
         }
         return count;
+    }
+
+    public void rotate(int[] nums, int k) {
+
     }
 }
