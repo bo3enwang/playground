@@ -35,7 +35,7 @@ public class ArrayAlgorithms {
 //            }
 //        }
         for (int i = 0; i < prices.length; i++) {
-            
+
         }
         return count;
     }
