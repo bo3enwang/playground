@@ -1,5 +1,8 @@
 package com.bow3n.learn.algorithms.easy;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,9 +18,6 @@ public class ArrayAlgorithms {
         int[] nums4 = new int[]{1, 2, 3, 4, 5, 6};
         int k4 = 2;
 
-//        rotate(nums1, k1);
-//        rotate(nums2, k2);
-//        rotate(nums3, k3);
         rotate1(nums4, k4);
     }
 
@@ -108,10 +108,39 @@ public class ArrayAlgorithms {
         }
     }
 
-    public static boolean containsDuplicate(int[] nums) {
-        for (int i = 0; i < nums.length; i++) {
 
+    @Test
+    public void test_containsDuplicate() {
+        Assertions.assertTrue(containsDuplicate_a(new int[]{1, 2, 3, 1}));
+        Assertions.assertTrue(containsDuplicate_a(new int[]{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}));
+        Assertions.assertFalse(containsDuplicate_a(new int[]{1, 2, 3, 4}));
+
+        Assertions.assertTrue(containsDuplicate_b(new int[]{1, 2, 3, 1}));
+        Assertions.assertTrue(containsDuplicate_b(new int[]{1, 1, 1, 3, 3, 4, 3, 2, 4, 2}));
+        Assertions.assertFalse(containsDuplicate_b(new int[]{1, 2, 3, 4}));
+    }
+
+    public static boolean containsDuplicate_a(int[] nums) {
+        if (nums.length == 0) {
+            return false;
         }
-        return true;
+        Set<Integer> s = new HashSet<>();
+        for (int num : nums) {
+            s.add(num);
+        }
+        return nums.length != s.size();
+    }
+
+    public static boolean containsDuplicate_b(int[] nums) {
+        if (nums.length == 0) {
+            return false;
+        }
+        Arrays.sort(nums);
+        for (int i = 1; i < nums.length - 1; i++) {
+            if (nums[i] == nums[i - 1]) {
+                return true;
+            }
+        }
+        return false;
     }
 }
