@@ -50,6 +50,8 @@ public class ArrayAlgorithms {
     }
 
     public void rotate(int[] nums, int k) {
+        for (int i = 0; i < nums.length; i++) {
 
+        }
     }
 }
