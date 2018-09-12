@@ -130,7 +130,6 @@ public class ArrayAlgorithms {
         Assertions.assertFalse(containsDuplicate_b(new int[]{1, 2, 3, 4}));
     }
 
-
     /**
      * 给定一个非空整数数组，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。
      *
@@ -175,5 +174,37 @@ public class ArrayAlgorithms {
         Assertions.assertEquals(1, singleNumber(new int[]{2, 2, 1}));
         Assertions.assertEquals(4, singleNumber(new int[]{4, 1, 2, 1, 2}));
         Assertions.assertEquals(4, singleNumber_a(new int[]{4, 1, 2, 1, 2}));
+    }
+    
+
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Arrays.sort(nums1);
+        Arrays.sort(nums2);
+        int num1Index = 0;
+        int num2Index = 0;
+        int length = Math.min(nums1.length, nums2.length);
+        int intersectArrIndex = 0;
+        int[] intersectArr = new int[length];
+
+        while (num1Index < nums1.length && num2Index < nums2.length) {
+            if (nums1[num1Index] == nums2[num2Index]) {
+                intersectArr[intersectArrIndex++] = nums1[num1Index];
+                num1Index++;
+                num2Index++;
+            } else if (nums1[num1Index] < nums2[num2Index]) {
+                num1Index++;
+            } else {
+                num2Index++;
+            }
+        }
+        return Arrays.copyOf(intersectArr, intersectArrIndex);
+    }
+
+
+    @Test
+    public void test_intersect() {
+        System.out.println(Arrays.toString(intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2})));
+        Assertions.assertEquals(new int[]{2, 2}, intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}));
+//        Assertions.assertEquals(new int[]{4, 9}, intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}));
     }
 }
