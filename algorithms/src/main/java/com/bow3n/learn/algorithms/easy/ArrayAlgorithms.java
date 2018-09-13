@@ -330,29 +330,63 @@ public class ArrayAlgorithms {
 
 
     public boolean isValidSudoku(char[][] board) {
-        for (int i = 0; i < board.length; i++) {
-            Set<Integer> rowMap = new HashSet<>();
-            Set<Integer> colMap = new HashSet<>();
-            for (int j = 0; j < board[i].length; j++) {
-                int num = board[i][j];
-                System.out.println(num);
+//        for (int i = 0; i < board.length; i++) {
+//            Set<String> rowSet = new HashSet<>();
+//            Set<String> colSet = new HashSet<>();
+//            for (int j = 0; j < board[i].length; j++) {
+//                char num = board[i][j];
+//                String value = String.valueOf(num);
+//                if (".".equals(value)) {
+//                } else {
+//                    if (rowSet.contains(value)) {
+//                        return false;
+//                    } else {
+//                        rowSet.add(value);
+//                    }
+//                    if (colSet.contains(value)) {
+//                        return false;
+//                    } else {
+//                        colSet.add(value);
+//                    }
+//                }
+//                System.out.println(num);
+//            }
+//        }
+
+        for (int i = 0; i < 9 * 9; i++) {
+            Set<Integer> rowSet = new HashSet<>();
+            Set<Integer> colSet = new HashSet<>();
+            Set<Integer> rectSet = new HashSet<>();
+            int col = i % 9;
+            int row = i / 9;
+            int num = board[col][row];
+            if (num != 46) {
+                if (rowSet.contains(num)) {
+                    return false;
+                } else {
+                    rowSet.add(num);
+                }
+            }
+            if (col > 7) {
+                colSet.clear();
             }
         }
+
         return true;
     }
 
     @Test
     public void test_isValidSudoku() {
-        String[][] board = new String[][]{{"8", "3", ".", ".", "7", ".", ".", ".", "."},
-                {"6", ".", ".", "1", "9", "5", ".", ".", "."},
-                {".", "9", "8", ".", ".", ".", ".", "6", "."},
-                {"8", ".", ".", ".", "6", ".", ".", ".", "3"},
-                {"4", ".", ".", "8", ".", "3", ".", ".", "1"},
-                {"7", ".", ".", ".", "2", ".", ".", ".", "6"},
-                {".", "6", ".", ".", ".", ".", "2", "8", "."},
-                {".", ".", ".", "4", "1", "9", ".", ".", "5"},
-                {".", ".", ".", ".", "8", ".", ".", "7", "9"}
+        char[][] board = new char[][]{{'8', '3', '.', '.', '7', '.', '.', '.', '.'},
+                {'6', '.', '.', '1', '9', '5', '.', '.', '.'},
+                {'.', '9', '8', '.', '.', '.', '.', '6', '.'},
+                {'8', '.', '.', '.', '6', '.', '.', '.', '3'},
+                {'4', '.', '.', '8', '.', '3', '.', '.', '1'},
+                {'7', '.', '.', '.', '2', '.', '.', '.', '6'},
+                {'.', '6', '.', '.', '.', '.', '2', '8', '.'},
+                {'.', '.', '.', '4', '1', '9', '.', '.', '5'},
+                {'.', '.', '.', '.', '8', '.', '.', '7', '9'}
         };
-        isValidSudoku();
-
+        System.out.println(isValidSudoku(board));
     }
+}
