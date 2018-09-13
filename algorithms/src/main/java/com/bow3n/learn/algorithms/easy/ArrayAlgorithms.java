@@ -3,9 +3,7 @@ package com.bow3n.learn.algorithms.easy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 public class ArrayAlgorithms {
     public static int removeDuplicates(int[] nums) {
@@ -175,7 +173,7 @@ public class ArrayAlgorithms {
         Assertions.assertEquals(4, singleNumber(new int[]{4, 1, 2, 1, 2}));
         Assertions.assertEquals(4, singleNumber_a(new int[]{4, 1, 2, 1, 2}));
     }
-    
+
 
     public int[] intersect(int[] nums1, int[] nums2) {
         Arrays.sort(nums1);
@@ -207,4 +205,154 @@ public class ArrayAlgorithms {
         Assertions.assertEquals(new int[]{2, 2}, intersect(new int[]{1, 2, 2, 1}, new int[]{2, 2}));
 //        Assertions.assertEquals(new int[]{4, 9}, intersect(new int[]{4, 9, 5}, new int[]{9, 4, 9, 8, 4}));
     }
-}
+
+
+    /**
+     * 给定一个由整数组成的非空数组所表示的非负整数，在该数的基础上加一。
+     *
+     * @param digits 整数组成的非空数组
+     * @return 在该数的基础上加一
+     */
+    public int[] plusOne(int[] digits) {
+        int i = digits.length - 1;
+        boolean loop = true;
+        while (loop) {
+            int newValue = digits[i] + 1;
+            if (newValue == 10) {
+                if (i == 0) {
+                    int[] newArr = new int[digits.length + 1];
+                    Arrays.fill(newArr, 0);
+                    newArr[0] = 1;
+                    return newArr;
+                }
+                digits[i--] = 0;
+            } else {
+                digits[i--] = newValue;
+                loop = false;
+            }
+        }
+        return digits;
+    }
+
+
+    @Test
+    public void test_plusOne() {
+        System.out.println(Arrays.toString(plusOne(new int[]{9, 9, 9, 9})));
+        System.out.println(Arrays.toString(plusOne(new int[]{9})));
+        System.out.println(Arrays.toString(plusOne(new int[]{1})));
+    }
+
+    /**
+     * 给定一个数组 nums，编写一个函数将所有 0 移动到数组的末尾，同时保持非零元素的相对顺序。
+     */
+    public void moveZeroes(int[] nums) {
+        int endIndex = nums.length - 1;
+        for (int i = nums.length - 1; i >= 0; i--) {
+            if (nums[i] == 0) {
+                for (int j = i; j < endIndex; j++) {
+                    int temp = nums[j];
+                    nums[j] = nums[j + 1];
+                    nums[j + 1] = temp;
+                }
+                endIndex--;
+            }
+        }
+    }
+
+    @Test
+    public void test_moveZeroes() {
+//        int[] nums = new int[]{0, 1, 2, 0, 3};
+        int[] nums = new int[]{0, 0, 1};
+        moveZeroes(nums);
+        System.out.println(Arrays.toString(nums));
+    }
+
+
+    /**
+     * 给定一个整数数组和一个目标值，找出数组中和为目标值的两个数。
+     * <p>
+     * stupid
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    public int[] twoSum(int[] nums, int target) {
+//        Arrays.sort(nums);
+        int[] positions = new int[2];
+        int firstIndex = 0;
+        int secondIndex = 1;
+        boolean secondLast = false;
+        while (firstIndex < nums.length - 1) {
+            int count = nums[firstIndex] + nums[secondIndex];
+            if (count == target) {
+                positions[0] = firstIndex;
+                positions[1] = secondIndex;
+                return positions;
+            } else {
+                if (secondIndex++ == nums.length - 1) {
+                    secondLast = true;
+                }
+            }
+            if (secondLast) {
+                firstIndex++;
+                secondIndex = firstIndex + 1;
+                secondLast = false;
+            }
+        }
+        return null;
+    }
+
+
+    public int[] twoSum_a(int[] nums, int target) {
+        Map<Integer, Integer> numMap = new HashMap<>();
+        for (int i = 0; i < nums.length; i++) {
+            if (!numMap.containsKey(nums[i])) {
+                numMap.put(nums[i], i);
+            }
+        }
+        for (int i = 0; i < nums.length; i++) {
+            int subtract = target - nums[i];
+            Integer otherIndex = numMap.get(subtract);
+            if (otherIndex != null && otherIndex != i) {
+                return new int[]{i, numMap.get(subtract)};
+            }
+        }
+        return null;
+    }
+
+
+    @Test
+    public void test_twoSum() {
+        System.out.println(Arrays.toString(twoSum_a(new int[]{3, 2, 4}, 6)));
+//        System.out.println(Arrays.toString(twoSum(new int[]{1, 3, 2, 3, 3, 6}, 9)));
+    }
+
+
+    public boolean isValidSudoku(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            Set<Integer> rowMap = new HashSet<>();
+            Set<Integer> colMap = new HashSet<>();
+            for (int j = 0; j < board[i].length; j++) {
+                int num = board[i][j];
+                System.out.println(num);
+            }
+        }
+        return true;
+    }
+
+    @Test
+    public void test_isValidSudoku() {
+        String[][] board = new String[][]{{"8", "3", ".", ".", "7", ".", ".", ".", "."},
+                {"6", ".", ".", "1", "9", "5", ".", ".", "."},
+                {".", "9", "8", ".", ".", ".", ".", "6", "."},
+                {"8", ".", ".", ".", "6", ".", ".", ".", "3"},
+                {"4", ".", ".", "8", ".", "3", ".", ".", "1"},
+                {"7", ".", ".", ".", "2", ".", ".", ".", "6"},
+                {".", "6", ".", ".", ".", ".", "2", "8", "."},
+                {".", ".", ".", "4", "1", "9", ".", ".", "5"},
+                {".", ".", ".", ".", "8", ".", ".", "7", "9"}
+        };
+        isValidSudoku();
+
+    }
