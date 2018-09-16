@@ -411,4 +411,36 @@ public class ArrayAlgorithms {
         };
         System.out.println(isValidSudoku(board1));
     }
+
+
+    public void rotate(int[][] matrix) {
+        int length = matrix.length;
+        for (int i = 0; i < length / 2; i++) {
+            for (int j = i; j < length - i - 1; j++) {
+                int temp = matrix[i][j];
+                matrix[i][j] = matrix[length - j - 1][i];
+                matrix[length - j - 1][i] = matrix[length - i - 1][length - j - 1];
+                matrix[length - i - 1][length - j - 1] = matrix[j][length - i - 1];
+                matrix[j][length - i - 1] = temp;
+            }
+        }
+
+
+    }
+
+
+    @Test
+    public void test_rotate() {
+        int[][] matrix =
+                {
+                        {5, 1, 9, 11},
+                        {2, 4, 8, 10},
+                        {3, 3, 6, 7},
+                        {5, 14, 12, 16}
+                };
+        rotate(matrix);
+        System.out.println(Arrays.deepToString(matrix));
+    }
+
+
 }
