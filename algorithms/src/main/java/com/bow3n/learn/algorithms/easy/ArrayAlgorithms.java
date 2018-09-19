@@ -439,6 +439,7 @@ public class ArrayAlgorithms {
                         {5, 14, 12, 16}
                 };
         rotate(matrix);
+
         System.out.println(Arrays.deepToString(matrix));
     }
 
