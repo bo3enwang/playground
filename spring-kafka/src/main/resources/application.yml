@@ -1,0 +1,8 @@
+spring.kafka:
+  bootstrap-servers: 118.24.29.131:9092 # 指定kafka 代理地址，可以多个
+  listener.concurrency: 3 # 指定listener 容器中的线程数，用于提高并发量
+  producer.batch-size: 1000 # 每次批量发送消息的数量
+  consumer.group-id: myGroup
+  template.default-topic: test
+
+logging.level.root: info
