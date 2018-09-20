@@ -262,4 +262,52 @@ public class StringAlgorithms {
 
     }
 
+
+    public int strStr(String haystack, String needle) {
+        if ("".equals(needle)) {
+            return 0;
+        }
+        if (haystack == null || haystack.length() == 0) {
+            return -1;
+        }
+        return haystack.indexOf(needle);
+    }
+
+    @Test
+    public void test_strStr() {
+        Assertions.assertEquals(2, strStr("hello", "ll"));
+    }
+
+
+    public String countAndSay(int n) {
+        Map<String, String> dict = new HashMap<>();
+        dict.put("1", "11");
+        dict.put("2", "12");
+        dict.put("11", "21");
+
+        Map<Integer, String> first = new HashMap<>();
+        first.put(1, "1");
+        first.put(2, "11");
+        first.put(3, "21");
+        if (n <= 3) {
+            return first.get(n);
+        }
+        String result = first.get(3);
+        for (int i = 4; i < n; i++) {
+            StringBuilder newS = new StringBuilder();
+            for (int j = 0; j < result.length(); j++) {
+                newS.append(dict.get(String.valueOf(result.charAt(j))));
+            }
+            result = newS.toString();
+        }
+        return result;
+    }
+
+
+    @Test
+    public void test_countAndSay() {
+        Assertions.assertEquals("1211", countAndSay(4));
+        Assertions.assertEquals("111221", countAndSay(5));
+    }
+
 }
