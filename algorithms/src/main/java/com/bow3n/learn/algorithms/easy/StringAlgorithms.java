@@ -280,25 +280,26 @@ public class StringAlgorithms {
 
 
     public String countAndSay(int n) {
-        Map<String, String> dict = new HashMap<>();
-        dict.put("1", "11");
-        dict.put("2", "12");
-        dict.put("11", "21");
-
-        Map<Integer, String> first = new HashMap<>();
-        first.put(1, "1");
-        first.put(2, "11");
-        first.put(3, "21");
-        if (n <= 3) {
-            return first.get(n);
-        }
-        String result = first.get(3);
-        for (int i = 4; i < n; i++) {
-            StringBuilder newS = new StringBuilder();
+        String result = "1";
+        for (int i = 1; i < n; i++) {
+            int start = -1;
+            StringBuilder newStr = new StringBuilder();
             for (int j = 0; j < result.length(); j++) {
-                newS.append(dict.get(String.valueOf(result.charAt(j))));
+                char ch = result.charAt(j);
+                if (j == result.length() - 1) {
+                    int num = j - start;
+                    newStr.append(String.format("%d%c", num, ch));
+                } else {
+                    char next = result.charAt(j + 1);
+                    if (ch != next) {
+                        int num = j - start;
+                        start = j;
+                        newStr.append(String.format("%d%c", num, ch));
+                    }
+                }
+
             }
-            result = newS.toString();
+            result = newStr.toString();
         }
         return result;
     }
@@ -310,4 +311,41 @@ public class StringAlgorithms {
         Assertions.assertEquals("111221", countAndSay(5));
     }
 
+
+    public String longestCommonPrefix(String[] strs) {
+        if (strs.length == 0) {
+            return "";
+        }
+        if (strs.length == 1) {
+            return strs[0];
+        }
+        int last = 0;
+        int minLength = strs[0].length();
+        for (int i = 1; i < strs.length; i++) {
+            minLength = Math.min(minLength, strs[i].length());
+        }
+        for (int i = 0; i < minLength; i++) {
+            char ch = strs[0].charAt(i);
+            for (int j = 0; j < strs.length; j++) {
+                if (strs[j].charAt(i) != ch) {
+                    return strs[0].substring(0, last);
+                }
+                last = i;
+            }
+        }
+        return strs[0].substring(0, minLength);
+    }
+
+
+    @Test
+    public void test_longestCommonPrefix() {
+        Assertions.assertEquals("fl", longestCommonPrefix(new String[]{"flower", "flow", "flight"}));
+        Assertions.assertEquals("", longestCommonPrefix(new String[]{"dog", "racecar", "car"}));
+        Assertions.assertEquals("h", longestCommonPrefix(new String[]{"hape", "hb", "hhhb"}));
+        Assertions.assertEquals("", longestCommonPrefix(new String[]{"", "hb", "hhhb"}));
+        Assertions.assertEquals("", longestCommonPrefix(new String[]{}));
+        Assertions.assertEquals("a", longestCommonPrefix(new String[]{"a"}));
+        Assertions.assertEquals("c", longestCommonPrefix(new String[]{"c", "c"}));
+        Assertions.assertEquals("aa", longestCommonPrefix(new String[]{"aa","aa"}));
+    }
 }
