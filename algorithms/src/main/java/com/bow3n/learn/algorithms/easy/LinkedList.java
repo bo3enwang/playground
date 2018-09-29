@@ -3,6 +3,7 @@ package com.bow3n.learn.algorithms.easy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -213,6 +214,22 @@ public class LinkedList {
             System.out.print(cur.val + " , ");
             cur = cur.next;
         }
+    }
+
+
+    public boolean isPalindrome(ListNode head) {
+        List<Integer> list = new ArrayList<>();
+        ListNode cur = head;
+        while (cur != null) {
+            list.add(cur.val);
+            cur = cur.next;
+        }
+        for (int i = 0, j = list.size() - 1; i < list.size() / 2; i++, j--) {
+            if (!list.get(i).equals(list.get(j))) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }
