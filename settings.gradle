@@ -4,4 +4,5 @@ include 'spring-core'
 include 'algorithms'
 include 'spring-kafka'
 include 'java-8'
+include 'concurrency'
 
