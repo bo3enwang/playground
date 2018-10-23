@@ -1,5 +1,9 @@
 package com.bow3n.learn.netty;
 
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelConfig;
+import io.netty.channel.ChannelPipeline;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
