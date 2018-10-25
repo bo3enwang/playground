@@ -23,7 +23,7 @@ public class WebSocketServer {
             b.group(bossGroup, workerGroup)
                     .channel(NioServerSocketChannel.class)
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(new WebSocketServerInitializer(null));
+                    .childHandler(new WebSocketServerInitializer());
 
             Channel ch = b.bind(4810).sync().channel();
             ch.closeFuture().sync();
