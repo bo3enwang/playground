@@ -1,5 +1,6 @@
 package com.bow3n.learn.netty.websocket;
 
+import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.socket.SocketChannel;

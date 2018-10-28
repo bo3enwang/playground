@@ -37,6 +37,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<WebSocke
                     System.out.println("error");
                 }
             });
+
         } else {
             // For now, let's ignore binary frames
             throw new UnsupportedOperationException("Invalid websocket frame received");
