@@ -20,7 +20,6 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<WebSocke
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, WebSocketFrame frame) throws Exception {
         if (frame instanceof TextWebSocketFrame) {
-            System.out.println(((TextWebSocketFrame) frame).text());
             PromiseCombiner promiseCombiner = new PromiseCombiner();
             allChannels.stream()
                     .filter(c -> c != ctx.channel())
@@ -32,6 +31,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<WebSocke
             promiseCombiner.finish(aggPromise);
             aggPromise.addListener((ChannelFutureListener) channelFuture -> {
                 if (frame.release()) {
+                    channelFuture.channel().close();
                     System.out.println("success");
                 } else {
                     System.out.println("error");
