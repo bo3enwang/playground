@@ -13,5 +13,7 @@ repositories {
 
 dependencies {
     compile group: 'io.netty', name: 'netty-all', version: '4.1.30.Final'
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile('org.junit.jupiter:junit-jupiter-api:5.3.0')
+    testCompile('org.junit.jupiter:junit-jupiter-params:5.3.0')
+    testRuntime('org.junit.jupiter:junit-jupiter-engine:5.3.0')
 }
