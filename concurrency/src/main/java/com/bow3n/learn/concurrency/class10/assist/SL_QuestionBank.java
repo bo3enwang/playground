@@ -27,8 +27,9 @@ public class SL_QuestionBank {
     public static void initBank() {
         for (int i = 0; i < Consts.SIZE_OF_QUESTION_BANK; i++) {
             String questionContent = makeQuestionDetail(Consts.QUESTION_LENGTH);
+            String sha = EncryptUtils.EncryptBySHA1(questionContent);
             questionBankMap.put(i, new QuestionInDBVo(i,
-                    questionContent));
+                    questionContent, sha));
         }
         updateQuestionTimer();//启动定期更新题库数据任务
     }
@@ -51,6 +52,19 @@ public class SL_QuestionBank {
         return questionBankMap.get(i);
     }
 
+    //获取题目摘要
+    public static String getSha(int i) {
+        SL_Busi.buisness(20);
+        return questionBankMap.get(i).getSha();
+    }
+
+    //定期更新题库数据
+    private static void updateQuestionTimer() {
+        System.out.println("开始定时更新题库..........................");
+        updateQuestionBank.scheduleAtFixedRate(new UpdateBank(),
+                15, 1, TimeUnit.SECONDS);
+    }
+
     //更新题库的定时任务
     private static class UpdateBank implements Runnable {
 
@@ -60,16 +74,10 @@ public class SL_QuestionBank {
             Random random = new Random();
             int questionId = random.nextInt(Consts.SIZE_OF_QUESTION_BANK);
             String questionContent = makeQuestionDetail(Consts.QUESTION_LENGTH);
+            String sha = EncryptUtils.EncryptBySHA1(questionContent);
             questionBankMap.put(questionId, new QuestionInDBVo(questionId,
-                    questionContent));
+                    questionContent, sha));
             System.out.println("题目【" + questionId + "】被更新！！");
         }
-    }
-
-    //定期更新题库数据
-    private static void updateQuestionTimer() {
-        System.out.println("开始定时更新题库..........................");
-        updateQuestionBank.scheduleAtFixedRate(new UpdateBank(),
-                15, 5, TimeUnit.SECONDS);
     }
 }
