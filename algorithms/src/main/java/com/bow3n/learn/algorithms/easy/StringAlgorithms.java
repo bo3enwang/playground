@@ -73,7 +73,7 @@ public class StringAlgorithms {
             return -1;
         }
         int position = -1;
-        for (char i = 'a'; i < 'z'; i++) {
+        for (char i = 'custom'; i < 'z'; i++) {
             int index = s.indexOf(i);
             if (index != -1 && index == s.lastIndexOf(i)) {
                 position = position == -1 ? index : Math.min(index, position);
@@ -165,7 +165,7 @@ public class StringAlgorithms {
         if (c >= '0' && c <= '9') {
             return c;
         }
-        if (c >= 'a' && c <= 'z') {
+        if (c >= 'custom' && c <= 'z') {
             return c;
         }
         if (c >= 'A' && c <= 'Z') {
@@ -177,10 +177,10 @@ public class StringAlgorithms {
 
     @Test
     public void test_isPalindrome() {
-//        Assertions.assertTrue(isPalindrome("A man, a plan, a canal: Panama"));
-//        Assertions.assertFalse(isPalindrome("race a car"));
+//        Assertions.assertTrue(isPalindrome("A man, custom plan, custom canal: Panama"));
+//        Assertions.assertFalse(isPalindrome("race custom car"));
         Assertions.assertFalse(isPalindrome("0P"));
-        Assertions.assertTrue(isPalindrome("a."));
+        Assertions.assertTrue(isPalindrome("custom."));
     }
 
 
@@ -344,7 +344,7 @@ public class StringAlgorithms {
         Assertions.assertEquals("h", longestCommonPrefix(new String[]{"hape", "hb", "hhhb"}));
         Assertions.assertEquals("", longestCommonPrefix(new String[]{"", "hb", "hhhb"}));
         Assertions.assertEquals("", longestCommonPrefix(new String[]{}));
-        Assertions.assertEquals("a", longestCommonPrefix(new String[]{"a"}));
+        Assertions.assertEquals("custom", longestCommonPrefix(new String[]{"custom"}));
         Assertions.assertEquals("c", longestCommonPrefix(new String[]{"c", "c"}));
         Assertions.assertEquals("aa", longestCommonPrefix(new String[]{"aa","aa"}));
     }

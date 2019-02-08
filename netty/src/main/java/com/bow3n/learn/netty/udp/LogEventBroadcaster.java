@@ -35,7 +35,7 @@ public class LogEventBroadcaster {
 //        }
 //
         int port = 8888;
-        File file = new File("E:\\a.log");
+        File file = new File("E:\\custom.log");
         LogEventBroadcaster broadcaster = new LogEventBroadcaster(
                 new InetSocketAddress("255.255.255.255", port), file);
         try {

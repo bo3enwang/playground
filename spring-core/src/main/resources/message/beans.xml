@@ -13,7 +13,7 @@
             <!--</list>-->
         <!--</property>-->
     <!--</bean>-->
-    <!-- this MessageSource is being used in a web application -->
+    <!-- this MessageSource is being used in custom web application -->
     <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
         <property name="basename" value="message/exceptions"/>
     </bean>

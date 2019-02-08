@@ -3,7 +3,7 @@ package com.bow3n.learn.algorithms.leetcode;
 /**
  * link
  *
- * <a href="https://leetcode-cn.com/problems/jewels-and-stones/">宝石和石头</a>
+ * <custom href="https://leetcode-cn.com/problems/jewels-and-stones/">宝石和石头</custom>
  *
  * @author bowen
  */

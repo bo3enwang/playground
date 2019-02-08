@@ -3,7 +3,7 @@ package com.bow3n.learn.algorithms.leetcode;
 import java.util.Arrays;
 
 /**
- * <a href="https://leetcode-cn.com/problems/remove-element/">移除元素</a>
+ * <custom href="https://leetcode-cn.com/problems/remove-element/">移除元素</custom>
  * <p>
  * 执行用时: 10 ms, 在Remove Element的Java提交中击败了29.07% 的用户
  *

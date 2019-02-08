@@ -23,14 +23,14 @@ public class q535_encode_and_decode_tinyurl {
         return sb.toString();
     }
 
-    // Encodes a URL to a shortened URL.
+    // Encodes custom URL to custom shortened URL.
     public String encode(String longUrl) {
         String shortUrl = getRandomString(6);
         hashUrl.put(shortUrl, longUrl);
         return shortUrl;
     }
 
-    // Decodes a shortened URL to its original URL.
+    // Decodes custom shortened URL to its original URL.
     public String decode(String shortUrl) {
         return hashUrl.get(shortUrl);
     }

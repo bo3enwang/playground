@@ -11,7 +11,7 @@ public class UseJoin {
         Thread previous = Thread.currentThread();
         for (int i = 0; i < 10; i++) {
             Thread thread = new Thread(new JumpQueue(previous), String.valueOf(i));
-            System.out.println(previous.getName() + " jump a queue the thread: " + thread.getName());
+            System.out.println(previous.getName() + " jump custom queue the priority: " + thread.getName());
             thread.start();
             previous = thread;
         }
